@@ -1,0 +1,19 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "semi": ["error", "always"],
+    "comma-dangle": ["error", "always-multiline"],
+    "max-len": [2, {"code": 200}],
+    "react/prop-types": "off"
+  },
+  "globals": {
+    "fetch": false,
+    "document": true
+  }
+}

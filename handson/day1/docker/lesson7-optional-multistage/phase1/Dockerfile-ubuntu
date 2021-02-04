@@ -1,0 +1,22 @@
+FROM ubuntu:16.04 as builder
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+                              bash \
+                              build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /opt/build
+WORKDIR /opt/build
+COPY myapp.cpp .
+
+RUN g++ myapp.cpp -o myapp
+
+FROM ubuntu:16.04
+
+RUN mkdir -p /opt/build
+WORKDIR /opt/build
+COPY --from=builder /opt/build/myapp .
+
+ENTRYPOINT ["/opt/build/myapp"]

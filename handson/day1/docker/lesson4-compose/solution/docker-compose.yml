@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  db:
+    environment:
+      POSTGRES_DB: chat
+      POSTGRES_PASSWORD: chat
+      POSTGRES_USER: chat
+    image: postgres:9.4
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  backend:
+    build: backend
+    command: ./wait-for db:5432 -- npm run dev
+    environment:
+      DATABASE_URL: postgres://chat:chat@db/chat
+    ports:
+      - 9000:9000
+
+  dev:
+    build: frontend
+    environment:
+      ENDPOINT: http://localhost:9000
+    ports:
+      - 8000:8000
+
+volumes:
+  dbdata:

@@ -1,0 +1,34 @@
+version: '2.1'
+
+services:
+  rocket:
+    image: rocket.chat
+    ports:
+      - 3000:3000
+    environment:
+      - ROOT_URL=http://localhost
+      - MONGO_URL=mongodb://db:27017/meteor
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - back-end
+
+  db:
+    image: mongo:3.0
+    command: --smallfiles
+    volumes:
+      - rocketdb:/data/db
+    networks:
+      - back-end
+    healthcheck:
+      test: ['CMD', 'mongo', '--eval', '"db.serverStatus()"']
+      interval: 10s
+      timeout: 10s
+      retries: 10
+
+networks:
+  back-end:
+
+volumes:
+  rocketdb:

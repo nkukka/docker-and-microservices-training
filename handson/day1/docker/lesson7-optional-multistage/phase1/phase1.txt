@@ -1,0 +1,26 @@
+### Docker extended multistage phase 0 ###
+
+Requirements:
+  - Working Dockerfile from phase 0
+
+Goal:
+  - Create optimized Dockerfile that optimizes Dockerfile-ubuntu Docker image size under 6MB
+
+1. Copy myapp.cpp from phase0 and compile Dockerfile-ubuntu to Docker image and
+   test it (run it), check image size
+
+2. Create copy of Dockerfile-ubuntu with name Dockerfile
+
+3. Use Alpine based image to create image that has only the previously compiled myapp application
+   - this isn't as easy as it might sound
+   - you need to compile the binary in alpine as Alpine has different c++ libraries based on MUSL
+   - to install g++ in Alpine use 'apk add --no-cache g++'
+   - in final image you need also standard libraries 'libstdc++'
+
+4. Build your image from this new Dockerfile as in step 1, test it and compare image sizes.
+   It should have same functionality.
+
+5. Check 'correct' solution from phase2, no cheating!
+
+TIP: Alpine images from https://hub.docker.com/r/library/alpine/
+     About MUSL libc in Alpine: http://gliderlabs.viewdocs.io/docker-alpine/caveats/

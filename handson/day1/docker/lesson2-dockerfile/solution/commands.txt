@@ -1,0 +1,20 @@
+
+
+
+docker build . -t lesson2
+
+docker run -d --name lesson2 -p 8080:8080 lesson2
+
+docker container run -d -p 8080:8080 --name lesson2container lesson2
+
+curl <docker-machine-ip>:8080
+
+
+docker container stop lesson2container
+- Exited (stopped) contained could be listed: docker container ps -a
+
+docker container start lesson2container
+
+docker container rm lesson2container
+
+docker image rm lesson2

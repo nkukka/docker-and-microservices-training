@@ -1,0 +1,23 @@
+### Docker extended multistage phase 0 ###
+
+Requirements:
+  - Working Docker installation
+  - A working Internet connection
+  - Basic docker knowledge from earlier docker exercises
+
+Goal:
+  - Create optimized Dockerfile that optimizes Dockerfile-fatty Docker image size under 120MB
+
+1. Compile Dockerfile-fatty to Docker image and test it (run it), check image size
+
+2. Create copy of Dockerfile-fatty with name Dockerfile
+
+3. Use second FROM ubuntu:16.04 to create image that has only the previously compiled myapp application
+
+4. Build your image from this new Dockerfile as in step 1, test it and compare image sizes.
+   It should have same functionality.
+
+5. Continue to phase1
+
+TIP: Use '-f Dockerfile-fatty' in building. Use also 'FROM blaa as builder' and
+     'COPY --from=builder' statements in new Dockerfile.

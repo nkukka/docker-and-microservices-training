@@ -1,0 +1,88 @@
+DEMO 1 - desired state vs current state
+-------------------------------------
+kubectl create -f pod.yaml
+kubectl get pods
+kubectl delete pod nginx-pod
+
+DEMO 2 - Kubernetes Manifests
+-------------------------
+
+cat pod.yaml
+
+DEMO 3 - Pods, ReplicaSets and Deployments
+-------------------------
+
+kubectl create -f pod.yaml
+kubectl get pods
+kubectl describe pod <podname>
+kubectl get pod -o yaml <podname>
+
+kubectl expose pod nginx-pod --type=NodePort --port=8081 --target-port=80
+
+kubectl delete pod nginx-pod
+kubectl delete service nginx-pod
+
+
+REPLICASETS
+---------------
+
+
+kubectl create -f replicaset.yaml
+kubectl get replicasets
+kubectl get pods
+
+kubectl edit replicaset <name>
+- selitä matchlabel
+- poista replicaset
+- tee pod ko labelilla
+- tee replicaset
+- esim app=helloworld
+# Scale
+kubectl scale --replicas=5 replicaset nginx-replicaset
+
+
+DEPLOYMENTS
+---------------
+
+kubectl create -f deployment.yaml --record
+kubectl scale --replicas=5 deployment/nginx-deployment
+
+kubectl edit deployment/nginx-deployment
+    nginx:1.12.1 -> nginx:latest
+
+kubectl rollout history deployment/nginx-deployment
+kubectl get replicaset
+kubectl rollout undo deployment/nginx-deployment
+kubectl describe deployments | grep Image
+kubectl delete -f deployment.yaml
+
+DEMO 4 - Services
+-------------------------
+
+kubectl create -f deployment.yaml --record
+kubectl expose deploy nginx-deployment --type=NodePort --port=8081 --target-port=80
+
+
+kubectl exec -it nginx-deployment-59dbc845cd-2h54w  -- /bin/bash
+echo "Pod 1" > /usr/share/nginx/html/index.html
+
+...
+
+./curl.sh
+
+delete pod
+
+
+
+DEMO 5 - Helm
+---------------
+kubectl create namespace helm-example
+helm init
+helm search
+
+helm install --name grafana --namespace helm-example stable/grafana --set service.type=NodePort
+
+kubectl get all -n helm-example
+
+helm delete grafana
+helm del --purge grafana
