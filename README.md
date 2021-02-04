@@ -1,3 +1,10 @@
+# Cloning this repository
+In order to get a copy of the hands-on materials, clone this repository on your local machine with the following command:
+```
+git clone git@github.com:nkukka/docker-and-microservices-training.git
+```
+
+
 # Installing the prerequisites (Linux, MacOS, Windows)
 Install the following software through the following links or by using your favorite package manager:
 - Docker Desktop (https://www.docker.com/products/docker-desktop)
