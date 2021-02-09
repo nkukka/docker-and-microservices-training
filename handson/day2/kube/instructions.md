@@ -181,7 +181,7 @@ spec:
 
 Step 2. When creating a pod use apiVersion v1, port information is the same 8080 which was used earlier exercise.
 
-Step 3. After you are ready with creating the pod file make a new manifest file for creating a deployment. For deployments you need to use apiVersion extensions/v1beta1.
+Step 3. After you are ready with creating the pod file make a new manifest file for creating a deployment.
 
 Step 4. In order to make your application accessible from outside, create one more manifest file for a service.
 
@@ -313,6 +313,8 @@ kubectl get pod pv-pod
 ```
 
 Step 11. Expose the running pod using kubectl expose command (or by creating a .yaml-file)
+
+- Note what the `containerPort` is set to in the pod .yaml file, and think about how it relates to exposing the pod.
 
 Step 12. Open your browser to `http://[MasterPublicIP]:[NodePort]`
 
