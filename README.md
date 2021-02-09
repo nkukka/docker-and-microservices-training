@@ -10,6 +10,7 @@ Install the following software through the following links or by using your favo
 - Docker Desktop (https://www.docker.com/products/docker-desktop)
 - Docker Compose (https://docs.docker.com/compose/install/)
 - Minikube (https://minikube.sigs.k8s.io/docs/start/)
+- Helm (https://helm.sh/docs/intro/quickstart/, https://helm.sh/docs/intro/install/)
 
 # Running Docker as non-root
 

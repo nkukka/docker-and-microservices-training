@@ -32,7 +32,7 @@ minikube docker-env
 
 - you can also create a new context
     ```bash
-    kubectl config set-context k8s-training --namespace=<your-namespace> --cluster=<cluster-name> --user=<user>
+    kubectl config set-context k8s-training --namespace=<your-namespace> --cluster=minikube --user=minikube
     ```
 
 - and change to that context
@@ -56,7 +56,7 @@ minikube docker-env
 - Deploy the project echoserver on master:
 
     ```bash
-    kubectl run hello-node --image=hello-node:v1 --port=8080 --record
+    kubectl create deployment hello-node --image=hello-node:v1 --port=8080
     ```
 
 - Inspect that the container is running:
@@ -89,20 +89,21 @@ minikube docker-env
 
     But wait, how do we deploy the image to our own registry?
     ```bash
-    docker tag hello-node:v1 127.0.0.1:<PORT_OF_REGISTRY>/hello-node:v1
-    docker push 127.0.0.1:<PORT_OF_REGISTRY>/hello-node:v1
+    docker tag hello-node:v1 $(minikube ip):5000/hello-node:v1
+    docker push $(minikube ip):5000/hello-node:v1
     ```
 - Let's try again and update the previous deployment image
     NOTE: see which image we now refer to
     ```bash
-    kubectl set image deployment/hello-node hello-node=127.0.0.1:<PORT_OF_REGISTRY>/hello-node:v1  --record
+    kubectl set image deployment/hello-node hello-node=localhost:5000/hello-node:v1  --record
 
     kubectl rollout status deployment/hello-node
     kubectl describe deployment hello-node
     kubectl get pods --output wide
     ```
+- You might wonder why has the `$(minikube ip)` part been replaced with `localhost` this time. This is because from your machine's point of view, minikube has an interface with the given ip address. However, it has proven to not work from within the minikube cluster, and since the registry is being run within the minikube cluster, we can just use `localhost` to point to it. 
 
-- Expose the service so we can access it:
+- Expose the service so that we can access it:
 
    ```bash
    kubectl expose deployment hello-node --type=NodePort --port=8080 --target-port=8080
