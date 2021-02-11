@@ -10,8 +10,8 @@ Goal:
   the tools needed to install dependencies and run the application. Copy whatever application you
   use to the folder where your Dockerfile is.
 
-3. For the application to run in the container you need to:
-  - Have node and npm available (comes with 'library/node')
+3. For the application to run in the container you need to make sure that the Dockerfile you are creating will create an image that meets the following requirements:
+  - Have node and npm available (comes with the image 'library/node')
   - Create a folder inside the image to store the application
   - Copy the application from this repository to the folder
   - Run 'npm install' to install all needed dependencies for the application

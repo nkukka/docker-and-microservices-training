@@ -45,7 +45,6 @@ To access a containerized web application we need to use port forwarding. In thi
 ```
 docker run -d --name mynginx -p 8080:80 nginx
 ```
-Now we can access nginx in the port 8080 of the virtual machine running docker server. Retrieving machine ip: `docker-machine ip dev`. You can try if you can relaunch nginx on host port 80.
 
 ## Managing images
 
@@ -59,7 +58,7 @@ Second, we'd probably like to change our page to be the index page in nginx. For
 ```
 <p>This is my page</p>
 ```
-Then, we must override the official index page with our own in Dockerfile:
+Then, we must override the official index page within our own in Dockerfile:
 ```
 COPY index.html /usr/share/nginx/html/index.html
 ```
@@ -93,15 +92,6 @@ docker push myname/alpine # requires account at dockerhub
 ```
 
 ## Volume mounts
-
-Note: Volume mounts don't work directly with Windows machines, in order to test this out you have to run the commands on the VM running docker
-
-```bash
-docker-machine ssh dev
-mkdir nginx-content
-cd nginx-content
-echo "Hello from docker-machine" > index.html
-```
 
 In the build example we overrode image content at build time. As a result, all containers launched from our custom image have a custom index page.
 Alternatively, we might want to override content at runtime. This can be achieved with a volume mount.
