@@ -1,7 +1,7 @@
 # Cloning this repository
 In order to get a copy of the hands-on materials, clone this repository on your local machine with the following command:
 ```
-git clone git@github.com:nkukka/docker-and-microservices-training.git
+git clone https://github.com/nkukka/docker-and-microservices-training.git
 ```
 
 
