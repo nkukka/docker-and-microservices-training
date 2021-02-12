@@ -1,5 +1,5 @@
 
-# Preqequisite
+# Prerequisite
 
 ```
 minikube docker-env
@@ -89,8 +89,8 @@ minikube docker-env
 
     But wait, how do we deploy the image to our own registry?
     ```bash
-    docker tag hello-node:v1 $(minikube ip):5000/hello-node:v1
-    docker push $(minikube ip):5000/hello-node:v1
+    docker tag hello-node:v1 localhost:5000/hello-node:v1
+    docker push localhost:5000/hello-node:v1
     ```
 - Let's try again and update the previous deployment image
     NOTE: see which image we now refer to
@@ -101,7 +101,6 @@ minikube docker-env
     kubectl describe deployment hello-node
     kubectl get pods --output wide
     ```
-- You might wonder why has the `$(minikube ip)` part been replaced with `localhost` this time. This is because from your machine's point of view, minikube has an interface with the given ip address. However, it has proven to not work from within the minikube cluster, and since the registry is being run within the minikube cluster, we can just use `localhost` to point to it. 
 
 - Expose the service so that we can access it:
 

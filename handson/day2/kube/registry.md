@@ -1,6 +1,6 @@
 
 
-# Install Docker Registry to your K8s cluster using Helm
+# Install Docker Registry to your K8s cluster
 ```bash
 minikube start
 echo "{     
